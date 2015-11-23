@@ -1,0 +1,7 @@
+@CHARSET "utf-8";
+div.main {
+	width:1200px;	
+	position:relative;	
+	margin:0 auto;	
+	border:1px solid;
+}
