@@ -52,6 +52,7 @@ public class LoginService {
 					closeConnection(connection, statement, resultSet);
 					return user;
 				}
+				user.setOffice(resultSet.getString("office"));
 			}
 			
 		closeConnection(connection, statement, resultSet);
@@ -80,7 +81,7 @@ public class LoginService {
 //		connection.close();
 //		statement.close();
 //		
-//		System.out.println("회원가입완료");
+//		System.out.println("�쉶�썝媛��엯�셿猷�");
 //	}
 }
 
