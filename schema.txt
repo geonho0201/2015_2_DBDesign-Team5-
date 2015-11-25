@@ -1,0 +1,197 @@
+GRANT CONNECT,RESOURCE,UNLIMITED TABLESPACE TO team5 IDENTIFIED BY delab;
+--이부분까지 Ctrl+Enter로 실행, 접속 옮김
+
+
+
+--team5에 접속해서 실행할 schema생성부분
+-- entity
+--1
+CREATE TABLE employee (
+employee_number CHAR(8),
+final_education VARCHAR2(255),
+hired_date DATE,
+previous_career NUMBER(6),
+salary NUMBER(30)
+);
+--2
+CREATE TABLE department (
+department_number CHAR(2),
+department_name VARCHAR2(255),
+office VARCHAR2(255),
+head_phone_number CHAR(11)
+);
+--3
+CREATE TABLE skill_set (
+skill_number CHAR(4),
+skill_name VARCHAR2(255)
+);
+--4
+CREATE TABLE job (
+job_number CHAR(2),
+job_name VARCHAR2(255)
+);
+--5
+CREATE TABLE project (
+project_number CHAR(8),
+project_name VARCHAR2(255),
+start_date DATE,
+due_date DATE,
+orderer VARCHAR2(255),
+project_desc VARCHAR2(1000)
+);
+
+-- relation
+--6
+CREATE TABLE profile (
+employee_number CHAR(8),
+id VARCHAR2(255),
+password VARCHAR2(255),
+name VARCHAR2(255),
+age NUMBER(3),
+phone_number CHAR(11),
+address VARCHAR2(255),
+email VARCHAR2(255),
+ssn CHAR(13),
+signup_date DATE,
+last_modified_time TIMESTAMP,
+last_signin_time TIMESTAMP
+);
+--7
+CREATE TABLE works_department (
+department_number CHAR(2),
+employee_number CHAR(8),
+position VARCHAR2(255)
+);
+--8
+CREATE TABLE of_skill_set (
+employee_number CHAR(8),
+skill_number CHAR(4),
+skill_level NUMBER(6)
+);
+--9
+CREATE TABLE assignment (
+employee_number CHAR(8),
+project_number CHAR(8),
+assign_date DATE,
+abort_date DATE
+);
+--10
+CREATE TABLE assign_job (
+employee_number CHAR(8),
+project_number CHAR(8),
+job_number CHAR(2)
+);
+--11
+CREATE TABLE eval (
+evaluatee_number CHAR(8),
+project_number CHAR(8),
+evaluater_number CHAR(8),
+eval_type VARCHAR2(255),
+business_score NUMBER(3),
+business_eval VARCHAR2(1000),
+communication_score NUMBER(3),
+communication_eval VARCHAR2(1000)
+);
+
+--PK, FK 설정
+--entity pk
+--1
+ALTER TABLE employee
+ADD CONSTRAINT employee_pk
+PRIMARY KEY (employee_number);
+
+--2
+ALTER TABLE department
+ADD CONSTRAINT department_pk
+PRIMARY KEY (department_number);
+
+--3
+ALTER TABLE skill_set
+ADD CONSTRAINT skill_set_pk
+PRIMARY KEY (skill_number);
+
+--4
+ALTER TABLE job
+ADD CONSTRAINT job_pk
+PRIMARY KEY (job_number);
+
+--5
+ALTER TABLE project
+ADD CONSTRAINT project_pk
+PRIMARY KEY (project_number);
+
+
+--relation fk, pk
+--6
+ALTER TABLE profile
+ADD CONSTRAINT profile_fk1
+FOREIGN KEY (employee_number) REFERENCES employee(employee_number);
+--
+ALTER TABLE profile
+ADD CONSTRAINT profile_pk
+PRIMARY KEY (employee_number,id);
+
+
+--7
+ALTER TABLE works_department
+ADD CONSTRAINT works_department_fk1
+FOREIGN KEY (employee_number) REFERENCES employee(employee_number);
+ALTER TABLE works_department
+ADD CONSTRAINT works_department_fk2
+FOREIGN KEY (department_number) REFERENCES department(department_number);
+--
+ALTER TABLE works_department
+ADD CONSTRAINT works_department_pk
+PRIMARY KEY (employee_number, department_number);
+
+--8
+ALTER TABLE of_skill_set
+ADD CONSTRAINT of_skill_set_fk1
+FOREIGN KEY (employee_number) REFERENCES employee(employee_number);
+ALTER TABLE of_skill_set
+ADD CONSTRAINT of_skill_set_fk2
+FOREIGN KEY (skill_number) REFERENCES skill_set(skill_number);
+--
+ALTER TABLE of_skill_set
+ADD CONSTRAINT of_skill_set_pk
+PRIMARY KEY (employee_number, skill_number);
+
+--9
+ALTER TABLE assignment
+ADD CONSTRAINT assignment_fk1
+FOREIGN KEY (employee_number) REFERENCES employee(employee_number);
+ALTER TABLE assignment
+ADD CONSTRAINT assignment_fk2
+FOREIGN KEY (project_number) REFERENCES project(project_number);
+--
+ALTER TABLE assignment
+ADD CONSTRAINT assignment_pk
+PRIMARY KEY (employee_number, project_number);
+
+--10
+ALTER TABLE assign_job
+ADD CONSTRAINT assign_job_fk1
+FOREIGN KEY (employee_number, project_number) REFERENCES assignment(employee_number, project_number);
+ALTER TABLE assign_job
+ADD CONSTRAINT assign_job_fk2
+FOREIGN KEY (job_number) REFERENCES job(job_number);
+--
+ALTER TABLE assign_job
+ADD CONSTRAINT assign_job_pk
+PRIMARY KEY (employee_number, project_number, job_number);
+
+--11
+ALTER TABLE eval
+ADD CONSTRAINT eval_fk1
+FOREIGN KEY (evaluatee_number) REFERENCES employee(employee_number);
+ALTER TABLE eval
+ADD CONSTRAINT eval_fk2
+FOREIGN KEY (project_number) REFERENCES project(project_number);
+ALTER TABLE eval
+ADD CONSTRAINT eval_fk3
+FOREIGN KEY (evaluater_number) REFERENCES employee(employee_number);
+--
+ALTER TABLE eval
+ADD CONSTRAINT eval_pk
+PRIMARY KEY (evaluatee_number, project_number, evaluater_number, eval_type);
+
