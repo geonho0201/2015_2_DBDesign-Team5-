@@ -15,30 +15,7 @@
 	
 	<div style="margin:5px; padding: 3px; border:1 solid">
 		<form action="${pageContext.request.contextPath}/loginController/join.do" method="post">
-		<table>
-			<tr>
-				<td>아이디 : </td>
-				<td><input type="text" name="userID"></td>
-			</tr>
-			<tr>
-				<td>패스워드 : </td>
-				<td><input type="password" name="userPW"></td>
-			</tr>
-			<tr>
-				<td>이름 : </td>
-				<td><input type="text" name="userName"></td>
-			</tr>
-			<tr>
-				<td>분류</td>
-				<td><input type="radio" name="userType" value="교수" checked>교수
-				<input type="radio" name="userType" value="학생">학생
-				<input type="radio" name="userType" value="관리자">관리자
-				</td>
-			</tr>
-			<tr>
-				<td rowspan="2"><input type="submit" value="회원가입"></td>
-			</tr>
-		</table>
+		
 		</form>
 	</div>
 </div>

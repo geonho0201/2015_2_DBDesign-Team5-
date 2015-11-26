@@ -1,10 +1,9 @@
 package kr.ac.mju;
-
-import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
-
+/*
 public class UserDao extends SqlMapClientDaoSupport{
-//	public List<User> selectUser(){
-//		return getSqlMapClientTemplate().queryForList("user.getAllUser");
-//	}
+	public List<User> selectUser(){
+		return getSqlMapClientTemplate().queryForList("user.getAllUser");
+	}
 
 }
+*/
