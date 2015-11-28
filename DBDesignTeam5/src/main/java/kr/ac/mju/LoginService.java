@@ -5,15 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-	private final static String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private final static String ID = "team5";
-	private final static String PASSWORD = "delab";
+	private final static String URL = Constants.URL;
+	private final static String ID = Constants.ID;
+	private final static String PASSWORD = Constants.PASSWORD;
 	
 	public User login(String UserID, String UserPassword) throws ClassNotFoundException, SQLException{
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -61,7 +59,7 @@ public class LoginService {
 					user.setLast_modified_time(rs.getString("last_modified_time"));
 					user.setLast_signin_time(rs.getString("last_signin_time"));
 					user.setWorks_department(rs.getString("department_number"));
-					user.setPostion(rs.getString("position"));
+					user.setPosition(rs.getString("position"));
 					
 					return user;
 				}

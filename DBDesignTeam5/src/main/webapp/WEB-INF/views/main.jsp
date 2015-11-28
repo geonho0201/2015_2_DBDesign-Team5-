@@ -9,6 +9,9 @@
 <body style="background-color: #888">
 	<jsp:include page="header.jsp"></jsp:include>
 	메인페이지<br/>
-	내용
+	<div style="float: left;">
+		<jsp:include page="navigator.jsp"></jsp:include>
+	</div>
+	<div>내용</div>
 </body>
 </html>
