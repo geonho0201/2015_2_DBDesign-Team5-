@@ -13,6 +13,8 @@ public class User {
 	private String signup_date;
 	private String last_modified_time;
 	private String last_signin_time;
+	private String works_department;
+	private String postion;
 	
 	public String getEmployee_number() {return employee_number;}
 	public void setEmployee_number(String employee_number) {this.employee_number = employee_number;}
@@ -38,5 +40,8 @@ public class User {
 	public void setLast_modified_time(String last_modified_time) {this.last_modified_time = last_modified_time;}
 	public String getLast_signin_time() {return last_signin_time;}
 	public void setLast_signin_time(String last_signin_time) {this.last_signin_time = last_signin_time;}
-	
+	public String getWorks_department() {return works_department;}
+	public void setWorks_department(String works_department) {this.works_department = works_department;}
+	public String getPostion() {return postion;}
+	public void setPostion(String postion) {this.postion = postion;}
 }

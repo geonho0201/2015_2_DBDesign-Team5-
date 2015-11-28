@@ -7,11 +7,11 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	프람트 솔루션
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
 <div>
+	<span style="background-color: #D99; color:white;">${errormsg}</span>
 	<form method="post" action="${request.contextPath}LoginController/login.do">
 		<table>
 		<tr>
@@ -25,6 +25,7 @@
 		</tr>
 		</table>
 	</form>
+	<a href="${pageContext.request.contextPath}/join">회원가입</a>
 </div>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>title</title>
 </head>
-<body>
+<body style="background-color: #888">
 	<jsp:include page="header.jsp"></jsp:include>
 	메인페이지<br/>
 	내용
