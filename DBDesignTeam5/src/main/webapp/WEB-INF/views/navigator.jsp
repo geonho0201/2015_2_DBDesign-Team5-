@@ -10,7 +10,7 @@
 <body>	
 	<table>
 	<tr><td>
-		<a href="">내정보</a>
+		<a href="${pageContext.request.contextPath}/MyInfoController/myInfo.do">내정보</a>
 	</td></tr>
 	<c:choose>
 		<c:when test="${sessionScope.user.getWorks_department() =='01'}">

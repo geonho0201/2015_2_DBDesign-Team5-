@@ -1,5 +1,8 @@
 package kr.ac.mju;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class User {
 	private String employee_number;
 	private String id;
