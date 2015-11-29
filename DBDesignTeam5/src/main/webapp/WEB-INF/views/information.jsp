@@ -4,21 +4,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/css.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>title</title>
 </head>
-<body>
+<body style="background-color: #888">
 	<jsp:include page="header.jsp"></jsp:include>
 	내 정보<br/>
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
 	</div>
-	
-
+	<div>
 	<form method = "post" action="${pageContext.request.contextPath}/MyInfoController/modify.do">
-	<table class="table">
+	<table>
 	<tr><td>ID: </td>		<td>${user.getId()}</td></tr>
 	<tr><td>NAME: </td>		<td>${user.getName()}</td></tr>
 	<tr><td>SSN: </td>		<td>${user.getSSN().substring(0,6)}-${user.getSSN().substring(6,13)}</td></tr>
@@ -39,9 +36,11 @@
 		<c:when test="${user.getWorks_department()=='08'}">개발부 </c:when>
 	</c:choose> </td></tr>
 	<tr><td>Position: </td>	<td>${user.getPosition()}</td></tr>
-	<tr><td><input type="submit" class="btn btn-default" value="정보수정"></td><td><input type="button" class="btn btn-default" value="홈으로" onclick="location.href='/mju/main'"/></td></tr>
+	<tr><td><input type="submit" value="정보수정"></td><td>		<input type="button" value="홈으로" onclick="location.href='/mju/main'"/></td></tr>
 	</table>
 	</form>
 	
+	
+	</div>
 </body>
 </html>

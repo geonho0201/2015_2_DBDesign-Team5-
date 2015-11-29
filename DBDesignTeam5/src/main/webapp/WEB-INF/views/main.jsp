@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/css.css" rel="stylesheet">
 <title>title</title>
 </head>
 <body style="background-color: #888">

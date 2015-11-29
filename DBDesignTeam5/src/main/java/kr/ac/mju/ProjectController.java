@@ -19,6 +19,7 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService service;
+	
 	private Assignment assignment;
 	private User user;
 	private String comparison;
@@ -54,12 +55,5 @@ public class ProjectController {
 		
 		return "assign";
 	}
-
-	
-	
-	
-	
-	
-	
 	
 }

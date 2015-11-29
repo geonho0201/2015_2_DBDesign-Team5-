@@ -4,11 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/css.css" rel="stylesheet">
 <title>title</title>
 </head>
-<body>
+<body style="background-color: #888">
 	<jsp:include page="header.jsp"></jsp:include>
 	정보수정<br/>
 	<div style="float: left;">
@@ -16,50 +14,7 @@
 	</div>
 	<div>
 	<form method="post" action="${pageContext.request.contextPath}/MyInfoController/updateData.do" name="modify">
-		  <div class="form-group">
-		    <label>ID</label>
-		    <input type="text" id="disabledTextInput" class="form-control" placeholder="${user.getId()}">
-		  </div>
-		  <div class="form-group">
-		    <label>Password</label>
-		    <input type="password" class="form-control"name="password" value="${user.getPassword()}">
-		  </div>
-		  <div class="form-group">
-		    <label>SSN</label>
-		    <input type="text" class="form-control" name="SSN1" value="${user.getSSN().substring(0,6)}">
-		  </div>
-		   <div class="form-group">
-		    <label>NAME</label>
-		    <input type="text" class="form-control" name="name" value="${user.getName()}">
-		  </div>  
-		  <div class="form-group">
-		    <label>AGE</label>
-		    <input type="text" class="form-control" name="age" value="${user.getAge()}">
-		  </div>  
-		  <div class="form-group">
-		    <label>PHONE</label>
-		    <input type="text" class="form-control" name="phone_number" value="${user.getPhone_number()}">
-		  </div>  
-		  <div class="form-group">
-		    <label>ADDRESS</label>
-		    <input type="text" class="form-control" name="address" value="${user.getAddress()}">
-		  </div>  
-		  <div class="form-group">
-		    <label>EMAIL</label>
-		    <input type="text" class="form-control" name="email" value="${user.getEmail()}"> @
-		   			 <select name=email_support class="form-control">
-									<option value="0" selected>선택하세요</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="naver.com">naver.com</option>
-									<option value="nate.com">nate.com</option>
-									<option value="hanmail.net">hanmail.net</option>
-									<option value="daum.net">daum.net</option>
-					</select>
-		  </div>
-		  <button type="submit" class="btn btn-default">Submit</button>
-	</form>
-	
-	<table class="table">
+	<table>
 	<tr><td>ID: </td>		<td>${user.getId()}</td></tr>
 	<tr><td>PASSWORD: </td>	<td><input type="password" name="password" value="${user.getPassword()}"/></td></tr>
 	<tr><td>SSN: </td>		<td><input type="text" name="SSN1" value="${user.getSSN().substring(0,6)}"/>-<input type="password" name="SSN2" value = "${user.getSSN().substring(6,13)}"/></td></tr>

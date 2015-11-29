@@ -28,7 +28,7 @@
 		
 		<td><input type="hidden" name="project_number" value=<c:out value="${result.project_number}"/>/>
 			<input type="submit" value="*" /></td>
-		</tr> 
+		</tr>
 		</form>
 	</c:forEach>
 	</table>

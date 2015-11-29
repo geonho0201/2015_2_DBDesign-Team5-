@@ -19,6 +19,11 @@ public class User {
 	private String works_department;
 	private String position;
 	
+	private String final_education;
+	private String hired_date;
+	private int previous_career;
+	private int salary; 
+	
 	public String getEmployee_number() {return employee_number;}
 	public void setEmployee_number(String employee_number) {this.employee_number = employee_number;}
 	public String getId() {return id;}
@@ -47,4 +52,15 @@ public class User {
 	public void setWorks_department(String works_department) {this.works_department = works_department;}
 	public String getPosition() {return position;}
 	public void setPosition(String position) {this.position = position;}
+	
+	public String getFinal_education() {return final_education;}
+	public void setFinal_education(String final_education) {this.final_education = final_education;}
+	public String getHired_date() {return hired_date;}
+	public void setHired_date(String hired_date) {this.hired_date = hired_date;}
+	public int getPrevious_career() {return previous_career;}
+	public void setPrevious_career(int previous_career) {this.previous_career = previous_career;}
+	public int getSalary() {return salary;}
+	public void setSalary(int salary) {this.salary = salary;}
+	
+	
 }

@@ -26,7 +26,7 @@ public class MyInfoService {
 		
 		Connection conn = null;
 		PreparedStatement stmt = null;
-		String sql = "update profile set LAST_MODIFIED_TIME=SYSTIMESTAMP, password=?,name=?,SSN=?, age=?,phone_number=?,address=?,email=? where id =?";
+		String sql = "update profile set password=?,name=?,SSN=?, age=?,phone_number=?,address=?,email=?,last_modified_time=systimestamp where id =?";
 		
 			conn = DriverManager.getConnection(URL, ID, PASSWORD);
 			stmt = conn.prepareStatement(sql);
