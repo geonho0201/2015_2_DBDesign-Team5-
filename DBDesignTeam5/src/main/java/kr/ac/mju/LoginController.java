@@ -34,6 +34,7 @@ public class LoginController {
 
 		if(user.getName()!=""){
 			session.setAttribute("user", user);
+			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}else{
 			redirectAttr.addFlashAttribute("errormsg","로그인에 실패하였습니다!");

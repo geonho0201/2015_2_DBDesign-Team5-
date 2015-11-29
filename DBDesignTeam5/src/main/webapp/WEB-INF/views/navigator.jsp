@@ -23,7 +23,7 @@
 			<a href="">직원관리</a>
 		</td></tr>
 		<tr><td>
-			<a href="">사내프로젝트조회</a>
+			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='03'}">
@@ -38,7 +38,7 @@
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='05'}">
 		<tr><td>
-			<a href="">내 프로젝트</a>
+			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">내 프로젝트</a>
 		</td></tr>
 		<tr><td>
 			<a href="">내 기술</a>
@@ -56,7 +56,7 @@
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='08'}">
 		<tr><td>
-			<a href="">내 프로젝트</a>
+			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">내 프로젝트</a>
 		</td></tr>
 		<tr><td>
 			<a href="">내 기술</a>
