@@ -17,6 +17,14 @@
 		<tr><td>
 			<a href="${pageContext.request.contextPath}/EmployeeController/employee.do">직원관리</a>
 		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='02'}">
 		<tr><td>
@@ -24,6 +32,12 @@
 		</td></tr>
 		<tr><td>
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='03'}">
@@ -47,6 +61,18 @@
 		<c:when test="${sessionScope.user.getWorks_department() =='06'}">
 		<tr><td>
 			<a href="${pageContext.request.contextPath}/EmployeeController/employee.do">직원검색</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
+		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/ProjectController/.do">프로젝트생성</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='07'}">
