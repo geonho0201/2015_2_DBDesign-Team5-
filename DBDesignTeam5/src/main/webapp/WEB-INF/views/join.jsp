@@ -38,7 +38,7 @@
 	<tr>
 		<td>연락처</td>
 		<td>
-		<input type="text" name="phone_number"/>구분선없이 입력하세요
+		<input type="text" name="phoneNumber"/>구분선없이 입력하세요
 		</td>
 	</tr>
 	<tr>
@@ -51,12 +51,12 @@
 	</tr>
 	<tr>
 		<td>주민등록번호</td>
-		<td><input type="text" name="SSN1"/>-<input type="password" name="SSN2"/></td>
+		<td><input type="text" name="ssnPrefix"/>-<input type="password" name="ssnSuffix"/></td>
 	</tr>
 	<tr>
 		<td>근무부서</td>
 		<td>
-		<select name="works_department">
+		<select name="worksDepartment">
 			<option>경영관리</option>
 			<option>인사</option>
 			<option>재무회계</option>
@@ -71,7 +71,7 @@
 	<tr>
 		<td>직급</td>
 		<td>
-		<select>
+		<select name = position>
 			<option>CEO</option>
 			<option>CTO</option>
 			<option>전무</option>
@@ -89,7 +89,8 @@
 	<tr>
 		<td colspan="2">
 		<input type="submit" value="등록">
-		<input type="button" value="취소" onclick="history.back(-1);">
+		<input type="button" value="취소" onclick="location.href='/mju'">
+		<input type="button" value="리셋" onclick="history.back(-1);">
 		</td>
 	</tr>
 	</table>
