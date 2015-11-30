@@ -22,7 +22,9 @@
 *.orig
 *.classpath
 *.xml
-*/target/**
+
+**/target/**
+**/Servers/**
 
 # Package Files #
 ##################
