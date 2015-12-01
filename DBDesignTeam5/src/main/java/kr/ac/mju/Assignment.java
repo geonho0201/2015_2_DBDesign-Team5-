@@ -2,6 +2,8 @@ package kr.ac.mju;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
+@Repository
 public class Assignment {
 	private String name;
 	private String employee_number;

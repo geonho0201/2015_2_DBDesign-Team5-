@@ -13,6 +13,7 @@
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
 	</div>
+	${message}	<!-- 직원투입 또는 삭제시 메시지 -->
 	<div>
 	<table border="1">
 	<tr><td>프로젝트 번호</td><td>프로젝트 이름</td><td>시작일</td><td>만료일</td><td>고객처</td><td>프로젝트 설명</td><td>상세</td></tr>
@@ -32,7 +33,7 @@
 		</form>
 	</c:forEach>
 	</table>
-	
+	${message}<!-- 평가실패시 나타나는 message box -->
 	</div>
 </body>
 </html>

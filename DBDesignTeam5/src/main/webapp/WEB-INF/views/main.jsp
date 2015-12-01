@@ -13,5 +13,6 @@
 		<jsp:include page="navigator.jsp"></jsp:include>
 	</div>
 	<div>내용</div>
+	${message}	<!--투입 투출시 메시지  -->
 </body>
 </html>

@@ -15,8 +15,10 @@
 	</div>
 	
 	<div>
+	<form method ="post" action = "${pageContext.request.contextPath}/EvalController/eval.do">
 	<table border="1">
-	<tr><td>직원 이름</td><td>직원 번호</td><td>프로젝트 번호</td><td>투입일</td><td>투출일</td><td>직책</td></tr>
+	<tr><td>직원 이름</td><td>직원 번호</td><td>프로젝트 번호</td><td>투입일</td><td>투출일</td><td>직책</td><td>평가</td></tr>
+	
 	<c:forEach items="${list}" var="result">
 		<tr>
 		<td><c:out value="${result.name}"/></td>
@@ -25,11 +27,25 @@
 		<td><c:out value="${result.assign_date}"/></td>
 		<td><c:out value="${result.abort_date}"/></td>
 		<td><c:out value="${result.job}"/></td>
-		</tr> 
+		<td><input type="radio" name="employee_number" value="${result.employee_number}"/>
+			<input type="hidden" name="project_number" value=<c:out value="${result.project_number}"/>/></td>
+		</tr>
 	</c:forEach>
+	
 	</table>
+	<input type="submit" value="평가하기"/>
 	<input type="button" value="홈으로" onclick="location.href='/mju/main'" />
+	</form>	
+	<c:if test="${job=='01'}">
+	<form method = "POST" action="${pageContext.request.contextPath}/AssignController/createForm.do">
+	<input type="hidden" name="project_number" value="${project_number}"/>
+	<input type="submit" value="직원 투입/삭제"/>
+	</form>
+	</c:if>
 	</div>
-
 </body>
+
+
+
+
 </html>

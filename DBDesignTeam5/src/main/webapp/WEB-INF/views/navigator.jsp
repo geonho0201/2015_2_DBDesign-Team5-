@@ -48,6 +48,9 @@
 		<tr><td>
 			<a href="${pageContext.request.contextPath}/EmployeeController/employee.do">직원검색</a>
 		</td></tr>
+		<tr><td>
+			<a href="${pageContext.request.contextPath}/ProjectController/createdPro.do">프로젝트 목록</a>
+		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='07'}">
 		<tr><td>
