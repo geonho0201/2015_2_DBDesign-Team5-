@@ -22,12 +22,8 @@ integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En
 		<jsp:include page="navigator.jsp"></jsp:include>
 		<div class="col-md-16">	
 		<h2>메인페이지</h2>
+		<h4>${message}</h4>
 	</div>
 	</div>
-<<<<<<< HEAD
-	<div>내용</div>
-	${message}	<!--투입 투출시 메시지  -->
-=======
->>>>>>> 9dadab3618e8668b514c3c496e7158abb8ea9a4e
 </body>
 </html>

@@ -10,19 +10,11 @@
 <body style="background-color: #fafafa">
 	<jsp:include page="header.jsp"></jsp:include>
 	<div style="float: left;">
-		<jsp:include page="navigator.jsp"></jsp:include>
-<<<<<<< HEAD
-	</div>
-	${message}	<!-- 직원투입 또는 삭제시 메시지 -->
-	<div>
-	<table border="1">
-	<tr><td>프로젝트 번호</td><td>프로젝트 이름</td><td>시작일</td><td>만료일</td><td>고객처</td><td>프로젝트 설명</td><td>상세</td></tr>
-=======
-	<div style="float: left;">
+	<jsp:include page="navigator.jsp"></jsp:include>
 	<div class="col-md-16">	
 	<h2>내 프로젝트</h2>
+	<h3>${message}</h3>	
 	<table class="table">
->>>>>>> 9dadab3618e8668b514c3c496e7158abb8ea9a4e
 	<c:forEach items="${list}" var="result">
 	<form method="post" action="${pageContext.request.contextPath}/ProjectController/assign.do">
 	<tr><td><h4>프로젝트 번호</h4></td><td><h4>프로젝트 이름</h4></td><td><h4>시작일</h4></td></tr>
@@ -41,11 +33,8 @@
 		</form>
 	</c:forEach>
 	</table>
-<<<<<<< HEAD
-	${message}<!-- 평가실패시 나타나는 message box -->
-=======
+	<h3>${message}</h3><!-- 평가실패시 나타나는 message box -->
 	</div>
->>>>>>> 9dadab3618e8668b514c3c496e7158abb8ea9a4e
 	</div>
 </body>
 </html>

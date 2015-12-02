@@ -7,34 +7,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>title</title>
 </head>
-<body style="background-color: #888">
+<body style="background-color: #fafafa">
 	<jsp:include page="header.jsp"></jsp:include>
-	직원투입<br/>
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
-	</div>
-	<div>
+	<div class="col-md-9">	
+	<h2>직원투입</h2>
 	<form method="POST" action="${pageContext.request.contextPath}/AssignController/insertAssign.do">
-	<table>
-	<tr><td>직원번호: </td>
-		<td><input type="hidden" name="name" value=""/><select name="employee_number">
+	<table class="table">
+	<tr><td><h4>직원번호:</h4> </td>
+		<td><input type="hidden" name="name" value=""/><div class="col-xs-3"><select class="form-control" name="employee_number">
 				<c:forEach items="${develList}" var="devList">
 				<option value="${devList.employee_number}">${devList.employee_number}</option>
 				</c:forEach>
 				<c:forEach items="${designList}" var="desList">
 				<option value="${desList.employee_number}">${desList.employee_number}</option>
 				</c:forEach>
-			</select></td></tr>
-	<tr><td>프로젝트 번호: </td>
-		<td>${project_number}<input type="hidden" name="project_number" value="${project_number}"/></td></tr>
+			</select></div></td></tr>
+	<tr><td><h4>프로젝트 번호:</h4> </td>
+		<td><h4>${project_number}</h4><input type="hidden" name="project_number" value="${project_number}"/></td></tr>
 		
-	<tr><td>투입일: </td>
-		<td><input type="text" name="assign_date" OnClick="Calendar(this, 'down','no');"></td></tr>
-	<tr><td>투출일: </td>
-		<td><input type="text" name="abort_date" OnClick="Calendar(this, 'down','no');"></td></tr>
+	<tr><td><h4>투입일:</h4></td>
+		<td><div class="col-xs-3"><input type="text" name="assign_date" class="form-control"OnClick="Calendar(this, 'down','no');"></div></td></tr>
+	<tr><td><h4>투출일:</h4> </td>
+		<td><div class="col-xs-3"><input type="text" name="abort_date" class="form-control"cOnClick="Calendar(this, 'down','no');"></div></td></tr>
 		
-	<tr><td>직책: </td>
-		<td><select name="job">
+	<tr><td><h4>직책:</h4> </td>
+		<td><div class="col-xs-3"><select class="form-control"name="job">
 			<option value="01">PM</option>
 			<option value="02">PL</option>
 			<option value="03">분석자</option>
@@ -42,7 +41,7 @@
 			<option value="05">프로그래머</option>
 			<option value="06">테스터</option>
 			<option value="07">디자이너</option>
-		</select></td></tr>
+		</select></div></td></tr>
 		
 	<tr><td><input type="submit" value="투입"/></td></tr>
 	
@@ -55,14 +54,14 @@
 	
 	<form method="POST" action="${pageContext.request.contextPath}/AssignController/deleteAssign.do">
 	<table>
-	<tr><td>직원 리스트: </td><td>
-		<td><select name="employee_number">
+	<tr><td><h4>직원 리스트:</h4> </td><td>
+		<td><div class="col-xs-3"><select class="form-control"name="employee_number">
 	<c:forEach items="${assign}" var="assignment">
 			<option value="${assignment.employee_number}">${assignment.employee_number}</option>
 		</c:forEach>
-			</select></td></tr>
+			</select></div></td></tr>
 	<tr><td><input type="hidden" name="project_number" value="${project_number}"/></td>
-		<td><input type="submit" value="투출"/></td></tr>
+		<td><button type="submit" class="btn btn-value="투출"/>투입</button></td></tr>
 	</table>
 	</form>
 

@@ -8,37 +8,31 @@
 <title>title</title>
 
 </head>
-<body style="background-color: #888">
+<body style="background-color: #fafafa">
 	<jsp:include page="header.jsp"></jsp:include>
-	프로젝트 생성<br/>
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
-	</div>
-	${message}
-	<div>
+		<div class="col-md-9">
+		<h2>프로젝트 생성</h2>
+		<h3>${message}</h3>
 	<form action="${pageContext.request.contextPath}/ProjectController/insertPro.do">
-	<table>
-	<tr><td>프로젝트 번호: </td><td>${project_number}<input type="hidden" name="project_number" value="${project_number}"/></td></tr>
-	<tr><td>프로젝트 이름: </td><td><input type="text" name="project_name"/></td></tr>
-	<tr><td>시작일: </td><td><input type="text" name="start_date" OnClick="Calendar(this, 'down','no');"></td></tr>
-	<tr><td>만료일: </td><td><input type="text" name="due_date" OnClick="Calendar(this, 'down','no');"></td></tr>
-	<tr><td>고객처: </td><td><input type="text" name="orderer"/></td></tr>
-	<tr><td>프로젝트 설명: </td><td><input type="text" name="project_desc"/></td></tr>
-	<tr><td>기획자 : </td><td>${session.employee_number}<input type="hidden" name="constructor_number" value="${session.employee_number}"/></td></tr>
-	<tr><td>PM설정 : </td><td><select name="employee_number">
+	<table class="table">
+	<tr><td><h5>프로젝트 번호:</h5> </td><td><h5>${project_number}</h5><div class="col-xs-3"><input type="hidden" class="form-control"name="project_number" value="${project_number}"/></div></td></tr>
+	<tr><td><h5>프로젝트 이름:</h5> </td><td><div class="col-xs-3"><input type="text" class="form-control"name="project_name"/></div></td></tr>
+	<tr><td><h5>시작일:</h5> </td><td><div class="col-xs-3"><input type="text" class="form-control"name="start_date" OnClick="Calendar(this, 'down','no');"></div></td></tr>
+	<tr><td><h5>만료일:</h5> </td><td><div class="col-xs-3"><input type="text" class="form-control"name="due_date" OnClick="Calendar(this, 'down','no');"></div></td></tr>
+	<tr><td><h5>고객처:</h5> </td><td><div class="col-xs-3"><input type="text" class="form-control"name="orderer"/></div></td></tr>
+	<tr><td><h5>프로젝트 설명:</h5> </td><td><div class="col-xs-3"><input type="text" class="form-control"name="project_desc"/></div></td></tr>
+	<tr><td><h5>기획자 :</h5> </td><td>${session.employee_number}<input type="hidden" class="form-control"name="constructor_number" value="${session.employee_number}"/></div></td></tr>
+	<tr><td><h5>PM설정 :</h5> </td><td><<div class="col-xs-3">select name="employee_number">
 								<c:forEach items="${developer}" var="user">
-								<option value="${user.employee_number}"><c:out value="${user.employee_number}"/></option>
+								<option class="form-control"value="${user.employee_number}"><c:out value="${user.employee_number}"/></option>
 								</c:forEach>
 								</select></td></tr>
-	<tr><td><input type="submit" value="프로젝트 만들기"/></td></tr>
+	<tr><td><button type="submit" class="btn btn-default"value="프로젝트 만들기"/>"프로젝트 만들기"</button></td></tr>
 	</table>
-	
 	</form>
-	
-	
-	
-	
-	
+	</div>
 	</div>
 </body>
 <script type="text/javascript">

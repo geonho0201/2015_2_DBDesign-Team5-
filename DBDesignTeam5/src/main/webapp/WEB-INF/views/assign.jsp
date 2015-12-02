@@ -21,11 +21,6 @@ integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En
 	<jsp:include page="header.jsp"></jsp:include>
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
-<<<<<<< HEAD
-	</div>
-	
-	
-=======
 	<div class="col-md-9">	
 	<h2>투입직원 목록</h2>
 	<table class="table">
@@ -39,26 +34,20 @@ integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En
 		<td><h4><c:out value="${result.abort_date}"/></h4></td>
 		<td><h4><c:out value="${result.job}"/></h4></td>
 		</tr> 
->>>>>>> 9dadab3618e8668b514c3c496e7158abb8ea9a4e
 	</c:forEach>
-	
 	</table>
-<<<<<<< HEAD
 	<input type="submit" value="평가하기"/>
 	<input type="button" value="홈으로" onclick="location.href='/mju/main'" />
 	</form>	
 	<c:if test="${job=='01'}">
 	<form method = "POST" action="${pageContext.request.contextPath}/AssignController/createForm.do">
 	<input type="hidden" name="project_number" value="${project_number}"/>
-	<input type="submit" value="직원 투입/삭제"/>
+	<input type="submit" class="btn btn-default" value="직원 투입/삭제"/>
 	</form>
 	</c:if>
-	</div>
-=======
 	<input type="button" class="btn btn-default" value="홈으로" onclick="location.href='/mju/main'" />
 	</div>
 </div>
->>>>>>> 9dadab3618e8668b514c3c496e7158abb8ea9a4e
 </body>
 
 

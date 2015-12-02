@@ -7,48 +7,47 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>title</title>
 </head>
-<body style="background-color: #888">
+<body style="background-color: #fafafa">
 	<jsp:include page="header.jsp"></jsp:include>
-	평가하기<br/>
 	<div style="float: left;">
 		<jsp:include page="navigator.jsp"></jsp:include>
-	</div>
-	<div>
-	${message}<!-- 평가완료시/실패시 나타나는 message box -->
+	<div class="col-md-9">
+	<h2>평가하기</h2>
+	<h3>${message}</<!-- 평가완료시/실패시 나타나는 message box -->
 	<form method="POST" action="${pageContext.request.contextPath}/EvalController/addEval.do" name="form">
-	<table>
+	<table class="table">
 	<c:forEach items="${list}" var="result">
 
 			<c:if test="${selectedEmp==result.employee_number}">
 			
-			<tr><td>평가직원 번호</td>
-				<td>${selectedEmp}<input type="hidden" name="evaluatee_number" value="${selectedEmp}"/></td></tr>
-			<tr><td>평가직원 이름</td>
-				<td>${result.name}<input type="hidden" name="project_number" value="${result.project_number}"/>
-								<input type="hidden" name="evaluater_number" value="${sessionScope.user.getEmployee_number()}"/></td></tr>
-			<tr><td>평가종류</td>
-				<td><select name="eval_type">
+			<tr><td><h5>평가직원 번호</h5></td>
+				<td><h5>${selectedEmp}</h5><div class="col-xs-3"><input type="hidden" class="form-control" name="evaluatee_number" value="${selectedEmp}"/></div></td></tr>
+			<tr><td><h5>평가직원 이름</h5></td>
+				<td><h5>${result.name}</h5><div class="col-xs-3"><input type="hidden" class="form-control" name="project_number" value="${result.project_number}"/></div>
+								<div class="col-xs-3"><input type="hidden" class="form-control" name="evaluater_number" value="${sessionScope.user.getEmployee_number()}"/></div></td></tr>
+			<tr><td><h5>평가종류</h5></td>
+				<td><div class="col-xs-3"><select name="eval_type"class="form-control" ></div>
 					<option value="동료평가">동료평가</option>
 					<c:if test="${myJob=='PM' }">
 						<option value="PM평가">PM평가</option>
 						<option value="고객평가">고객평가</option>
 					</c:if>		
 			</select></td></tr>
-			<tr><td>비즈니스 점수</td>
-				<td><input type="text" name="business_score" value="100" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></td></tr>
-			<tr><td>비즈니스 평가</td>
-				<td><input type="text" name="business_eval"/></td></tr>
-			<tr><td>커뮤니케이션 점수</td>
-				<td><input type="text" name="communication_score" value="100" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></td></tr>
-			<tr><td>커퓨티케이션 평가</td>
-				<td><input type="text" name="communication_eval"/></td></tr>
+			<tr><td><h5>비즈니스 점수</h5></td>
+				<td><div class="col-xs-3"><input type="text" class="form-control" name="business_score" value="100" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></div></td></tr>
+			<tr><td><h5>비즈니스 평가</h5></td>
+				<td><div class="col-xs-3"><input type="text" class="form-control" name="business_eval"/></td></tr>
+			<tr><td><h5>커뮤니케이션 점수</h5></td>
+				<td><div class="col-xs-3"><input type="text"class="form-control"  name="communication_score" value="100" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></div></td></tr>
+			<tr><td><h5>커퓨티케이션 평가</h5></td>
+				<td><div class="col-xs-3"><input type="text" class="form-control" name="communication_eval"/></div></td></tr>
 			</c:if>
 		</c:forEach>
 
-	<tr><td><input type="submit" value="제출" onclick="constraint(); return false;"/></td>
-		<td><input type="button" value="홈으로" onclick="location.href='/mju/main'"/></td></tr>
+	<tr><td><input type="submit" class="btn btn-default" value="제출" onclick="constraint(); return false;"/>   <input type="button" value="홈으로" onclick="location.href='/mju/main'"/></td></tr>
 	</table>
 	</form>
+	</div>
 	</div>
 </body>
 
