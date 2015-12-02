@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.stereotype.Service;
 
@@ -29,22 +31,28 @@ public class JoinService {
 	 * @throws SQLException 
 	 * @throws InputDataNotValidException 
 	 * @throws InputDataRedundantException 
+	 * @throws ParseException 
 	 */
 	public boolean join(String employeeNumber, String userID, String userPassword,
 			String userPasswordCheck, String name, String age, String phoneNumber,
 			String address, String email, String ssnPrefix, String ssnSuffix,
-			String worksDepartment, String position, String finalEducaion,
-			String previousCareer, String skillName, String skillLevel)
-					throws ClassNotFoundException, SQLException, InputDataNotValidException, InputDataRedundantException {
+			String worksDepartment, String position, String hiredDate, String previousCareer,
+			String finalEducaion, String skillName, String skillLevel)
+					throws ClassNotFoundException, SQLException, InputDataNotValidException, InputDataRedundantException, ParseException {
 		
-		/* 정수형의 입력값들을 초기화한다(Integer 파싱시 에러 방지). */
+		/* 정수형 초기화(파싱시 에러 방지) */
 		if ("".equals(age))						age = "0";
 		if ("".equals(previousCareer))		previousCareer = "0";
 		if ("".equals(skillLevel))			skillLevel = "0";
 		
-		int ageInt = Integer.parseInt(age);
-		int previousCareerInt = Integer.parseInt(previousCareer);
-		int skillLevelInt = Integer.parseInt(skillLevel);
+		/* 정수형 파싱 */
+		int parsedAge = Integer.parseInt(age);
+		int parsedPreviousCareer = Integer.parseInt(previousCareer);
+		int parsedSkillLevel = Integer.parseInt(skillLevel);
+		
+		/* 날짜형 파싱 */
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date parsedHiredDate = new java.sql.Date(formatter.parse(hiredDate).getTime());
 		
 		/* 입력된 정보의 유효성을 검사한다. */
 		if (!FieldValidator.validateField(employeeNumber, 8, 8, "[^\\d]"))
@@ -57,7 +65,7 @@ public class JoinService {
 		else if (!FieldValidator.validateField(name, 2, 20, "[^\\가-힣a-zA-Z]"))
 			throw new InputDataNotValidException("이름이 유효하지 않습니다.");
 		else if (!FieldValidator.validateField(age, 2, 3, "[^\\d]")
-				|| (ageInt <= 10 || ageInt > 100))
+				|| (parsedAge <= 10 || parsedAge > 100))
 			throw new InputDataNotValidException("나이가 유효하지 않습니다.");
 		
 		
@@ -75,12 +83,13 @@ public class JoinService {
 			String sql = null;
 			
 			/* employee 테이블에 직원 정보를 삽입한다. */
-			sql = "INSERT INTO employee (employee_number, final_education, previous_career) "
-					+ "VALUES (?, ?, ?)";
+			sql = "INSERT INTO employee (employee_number, final_education, hired_date, previous_career) "
+					+ "VALUES (?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, employeeNumber);
 			ps.setString(2, finalEducaion);
-			ps.setInt(3, previousCareerInt);
+			ps.setDate(3, parsedHiredDate);
+			ps.setInt(4, parsedPreviousCareer);
 			ps.executeUpdate();
 			ps.close();
 			
@@ -93,7 +102,7 @@ public class JoinService {
 			ps.setString(2, userID);
 			ps.setString(3, userPassword);
 			ps.setString(4, name);
-			ps.setInt(5, ageInt);
+			ps.setInt(5, parsedAge);
 			ps.setString(6, phoneNumber);
 			ps.setString(7, address);
 			ps.setString(8, email);
@@ -127,7 +136,7 @@ public class JoinService {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, skillName);
 			ps.setString(2, employeeNumber);
-			ps.setInt(3, skillLevelInt);
+			ps.setInt(3, parsedSkillLevel);
 			ps.executeUpdate();
 			ps.close();
 			

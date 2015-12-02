@@ -2,6 +2,7 @@ package kr.ac.mju;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -78,8 +79,9 @@ public class LoginController {
 		String ssnSuffix = request.getParameter("ssnSuffix");
 		String worksDepartment = request.getParameter("worksDepartment");
 		String position = request.getParameter("position");
-		String finalEducation = request.getParameter("finalEducation");
+		String hiredDate = request.getParameter("hiredDate");
 		String previousCareer = request.getParameter("previousCareer");
+		String finalEducation = request.getParameter("finalEducation");
 		String skillName = request.getParameter("skillName");
 		String skillLevel = request.getParameter("skillLevel");
 		
@@ -87,27 +89,26 @@ public class LoginController {
 			
 			boolean success = joinService.join(employeeNumber, userID, userPassword, userPasswordCheck,
 					name, age, phoneNumber, address, email, ssnPrefix, ssnSuffix, worksDepartment, position,
-					finalEducation, previousCareer, skillName, skillLevel);
+					hiredDate, previousCareer, finalEducation, skillName, skillLevel);
 			
 			if (success == true) {
 				logger.info(name + "님이 성공적으로 회원가입 했습니다.");
 				return "redirect:/";
 			} else {
 				logger.info(name + "님의 회원가입에 실패했습니다.");
-				return null;
+				request.setAttribute("errorMessage", "회원가입에 실패했습니다.");
+				return "/join";
 			}
-		}
-		catch (InputDataNotValidException e)
-		{
+		} catch (InputDataNotValidException e) {
 			request.setAttribute("errorMessage", e.getMessage());
-//			return "/join";
-		}
-		catch (InputDataRedundantException e)
-		{
+			return "/join";
+		} catch (InputDataRedundantException e) {
 			request.setAttribute("errorMessage", e.getMessage());
-//			return "/join";
+			return "/join";
+		} catch (ParseException e) {
+			request.setAttribute("errorMessage", e.getMessage());
+			return "/join";
 		}
-		return null;
 	}
 	
 }
