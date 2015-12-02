@@ -5,13 +5,13 @@ public class Constants {
 	public final static String ID = "team5";
 	public final static String PASSWORD = "delab";
 	
-	//ºÎ¼­
-	public final static String D01 = "°æ¿µ°ü¸®";
-	public final static String D02 = "ÀÎ»ç";
-	public final static String D03 = "Àç¹«È¸°è";
-	public final static String D04 = "¸¶ÄÉÆÃ";
-	public final static String D05 = "µðÀÚÀÎ";
-	public final static String D06 = "¿µ¾÷±âÈ¹";
-	public final static String D07 = "¿¬±¸°³¹ß";
-	public final static String D08 = "°³¹ßÆÀ";
+	//ï¿½Î¼ï¿½
+	public final static String D01 = "ï¿½æ¿µï¿½ï¿½ï¿½ï¿½";
+	public final static String D02 = "ï¿½Î»ï¿½";
+	public final static String D03 = "ï¿½ç¹«È¸ï¿½ï¿½";
+	public final static String D04 = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	public final static String D05 = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	public final static String D06 = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¹";
+	public final static String D07 = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+	public final static String D08 = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 }

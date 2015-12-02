@@ -3,19 +3,19 @@ package kr.ac.mju;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
+
+import kr.ac.mju.exception.InputDataNotValidException;
+import kr.ac.mju.exception.InputDataRedundantException;
 
 @Service
 public class JoinService {
 	private final static String URL = Constants.URL;
 	private final static String ID = Constants.ID;
 	private final static String PASSWORD = Constants.PASSWORD;
-
+	
 	/**
 	 * 사용자로부터 입력받은 정보들을 이용하여 회원가입을 시도한다.<br />
 	 * 각 정보들의 유효성을 검사하여 유효한 경우 입력된 정보를 DB에 쓴 다음
@@ -26,22 +26,45 @@ public class JoinService {
 	 * @return
 	 * @throws ClassNotFoundException
 	 * @throws SQLException 
+	 * @throws InputDataNotValidException 
+	 * @throws InputDataRedundantException 
 	 */
 	public boolean join(String employeeNumber, String userID, String userPassword,
-			String userPasswordCheck, String name, int age, String phoneNumber,
+			String userPasswordCheck, String name, String age, String phoneNumber,
 			String address, String email, String ssnPrefix, String ssnSuffix,
 			String worksDepartment, String position, String finalEducaion,
-			int previousCareer, String skillName, int skillLevel)
-					throws ClassNotFoundException, SQLException {
+			String previousCareer, String skillName, String skillLevel)
+					throws ClassNotFoundException, SQLException, InputDataNotValidException, InputDataRedundantException {
 		
-		// 입력된 정보의 유효성을 검사한다.
-		if (!validateId(userID) || !validatePassword(userPassword, userPasswordCheck)) {
-			return false;
-		} else {
+		/* 정수형의 입력값들을 초기화한다(Integer 파싱시 에러 방지). */
+		if ("".equals(age))						age = "0";
+		else if ("".equals(previousCareer))		previousCareer = "0";
+		else if ("".equals(skillLevel))			skillLevel = "0";
+		
+		int ageInt = Integer.parseInt(age);
+		int previousCareerInt = Integer.parseInt(previousCareer);
+		int skillLevelInt = Integer.parseInt(skillLevel);
+		
+		/* 입력된 정보의 유효성을 검사한다. */
+		if (!validateField(employeeNumber, 8, 8, "[^\\d]"))
+			throw new InputDataNotValidException("사원번호가 유효하지 않습니다.");
+		else if (!validateField(userID, 6, 20, "[^\\w\\d]"))
+			throw new InputDataNotValidException("아이디가 유효하지 않습니다.");
+		else if (!validateField(userPassword, 6, 20, "[^\\x00-\\x7F]")	// [^\\x00-\\x7F]: ASCII 코드
+				|| !userPassword.equals(userPasswordCheck))				// 비밀번호 일치여부 추가 검사.
+			throw new InputDataNotValidException("비밀번호가 유효하지 않습니다.");
+		
+		/* 입력된 정보의 중복성을 검사한다. */
+		else if(isDuplicateInDB("employee", "employee_number", userID))
+			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
+		else if(isDuplicateInDB("profile", "id", userID))
+			throw new InputDataRedundantException("입력한 아이디가 이미 사용중입니다.");
+		
+		/* 입력된 정보가 유효한 경우, */
+		else {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = DriverManager.getConnection(URL, ID, PASSWORD);;
 			PreparedStatement ps = null;
-			ResultSet rs = null;
 			String sql = null;
 			
 			/* employee 테이블에 직원 정보를 삽입한다. */
@@ -50,7 +73,7 @@ public class JoinService {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, employeeNumber);
 			ps.setString(2, finalEducaion);
-			ps.setInt(3, previousCareer);
+			ps.setInt(3, previousCareerInt);
 			ps.executeUpdate();
 			ps.close();
 			
@@ -63,7 +86,7 @@ public class JoinService {
 			ps.setString(2, userID);
 			ps.setString(3, userPassword);
 			ps.setString(4, name);
-			ps.setInt(5, age);
+			ps.setInt(5, ageInt);
 			ps.setString(6, phoneNumber);
 			ps.setString(7, address);
 			ps.setString(8, email);
@@ -97,67 +120,46 @@ public class JoinService {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, skillName);
 			ps.setString(2, employeeNumber);
-			ps.setInt(3, skillLevel);
+			ps.setInt(3, skillLevelInt);
 			ps.executeUpdate();
 			ps.close();
 			
 			return true;
 		}
 	}
-	
+
 	/**
-	 * 사용자로부터 입력된 ID의 유효성을 검사한다.<br />
-	 * ID는 6~20자의 영문자(대소문자) 혹은 숫자로 이루어져야 한다.
+	 * 'tableName' 테이블의 'attrName'이란 속성값 중에
+	 * 'field'라는 필드가 존재하는지 검사한다.
 	 * 
-	 * @param userID
-	 * @return
+	 * @param tableName
+	 * @param attrName
+	 * @param field
+	 * @return 이미 존재할 경우 true, 존재하지 않을 경우 false를 반환한다.
 	 */
-	private boolean validateId(String userID) {
-		Pattern pattern;
-		Matcher matcher;
-		
-		if (userID.length() < 6 || userID.length() > 20) {
-			return false;
-		}
-		
-		pattern = Pattern.compile("[^\\w\\d]");
-		matcher = pattern.matcher(userID);
-		if (matcher.find()) {
-			return false;
-		}
-		
-		return true;
+	private boolean isDuplicateInDB(String tableName, String attrName, String field)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private boolean validateField(String field, int minLen, int maxLen) {
+		return validateField(field, minLen, maxLen, null);
 	}
 	
 	/**
-	 * 사용자로부터 입력된 비밀번호의 유효성을 검사한다.<br />
-	 * 비밀번호는 6~20자의 영문자(대소문자) 혹은 숫자 혹은
-	 * 특수문자로 이루어져야 하며 확인용으로 입력된 비밀번호와
-	 * 정확히 일치해야 한다.
+	 * 입력된 정보의 유효성을 검사한다.<br />
+	 * 'field'의 길이가 'minLen'과 'maxLen' 사이인지,
+	 * 그리고 'regex'와 일치하지 않는지 여부를 검사한다.
 	 * 
-	 * @param userPassword
-	 * @param userPasswordCheck
-	 * @return
+	 * @return 위 조건들을 만족할 경우 true, 만족하지 않을 경우 false.
 	 */
-	private boolean validatePassword(String userPassword,
-			String userPasswordCheck) {
-		Pattern pattern;
-		Matcher matcher;
-		
-		if (!userPassword.equals(userPasswordCheck)
-				|| (userPassword.length() < 6 || userPassword.length() > 20)) {
+	private boolean validateField(String field, int minLen, int maxLen, String regex) {
+		if (regex != null) {
+			return false;
+		} else {
 			return false;
 		}
-		
-		// 0x00~0x7F는 ASCII 코드의 범위이다.
-		// ASCII 코드는 영문자(대소문자), 숫자, 일부 특수문자(!@#$%^&*()+- 등)을 포함한다.
-		pattern = Pattern.compile("[^\\x00-\\x7F]");
-		matcher = pattern.matcher(userPassword);
-		if (matcher.find()) {
-			return false;
-		}
-		
-		return true;
 	}
 	
 }
