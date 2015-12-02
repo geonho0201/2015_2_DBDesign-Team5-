@@ -61,7 +61,7 @@ public class JoinService {
 			throw new InputDataNotValidException("나이가가 유효하지 않습니다.");
 		
 		/* 입력된 정보의 중복성을 검사한다. */
-		else if(FieldValidator.isExistInDB("employee", "employee_number", userID))
+		else if(FieldValidator.isExistInDB("employee", "employee_number", employeeNumber))
 			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
 		else if(FieldValidator.isExistInDB("profile", "id", userID))
 			throw new InputDataRedundantException("입력한 아이디가 이미 사용중입니다.");
