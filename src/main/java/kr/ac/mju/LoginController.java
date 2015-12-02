@@ -62,11 +62,12 @@ public class LoginController {
 		logger.info("회원가입 요청을 받았습니다.");
 
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userId");
+		String employeeNumber = request.getParameter("employeeNumber");
+		String userID = request.getParameter("userID");
 		String userPassword = request.getParameter("userPassword");
 		String userPasswordCheck = request.getParameter("userPasswordCheck");
 		String name = request.getParameter("name");
-		String age = request.getParameter("age");
+		int age = Integer.parseInt(request.getParameter("age"));
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
@@ -74,14 +75,20 @@ public class LoginController {
 		String ssnSuffix = request.getParameter("ssnSuffix");
 		String worksDepartment = request.getParameter("worksDepartment");
 		String position = request.getParameter("position");
-		User user = joinService.join(userId, userPassword, userPasswordCheck, name, age, phoneNumber, address, email,
-				ssnPrefix, ssnSuffix, worksDepartment, position);
+		String finalEducation = request.getParameter("finalEducation");
+		int previousCareer = Integer.parseInt(request.getParameter("previousCareer"));
+		String skillName = request.getParameter("skillName");
+		int skillLevel = Integer.parseInt(request.getParameter("skillLevel"));
+		
+		boolean success = joinService.join(employeeNumber, userID, userPassword, userPasswordCheck,
+				name, age, phoneNumber, address, email, ssnPrefix, ssnSuffix, worksDepartment, position,
+				finalEducation, previousCareer, skillName, skillLevel);
 
-		if (user != null) {
+		if (success == true) {
 			logger.info(name + "님이 성공적으로 회원가입 했습니다.");
-			return "join";
+			return "redirect:/";
 		} else {
-			logger.info(name + "님의 회원가입이 실패하였습니다.");
+			logger.info(name + "님의 회원가입에 실패했습니다.");
 			return null;
 		}
 	}

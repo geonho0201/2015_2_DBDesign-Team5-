@@ -14,6 +14,10 @@
 	<th colspan="2">내용입력</th>
 	</tr>
 	<tr>
+		<td>직원번호</td>
+		<td><input type="text" name="employeeNumber"/></td>
+	</tr>
+	<tr>
 		<td>아이디</td>
 		<td><input type="text" name="userID"/></td>
 	</tr>
@@ -85,6 +89,44 @@
 			<option>사원</option>
 		</select>
 		</td>
+	</tr>
+	<tr>
+		<td>입사일</td>
+		<td><input type="date" name="hiredDate"/></td>
+	</tr>
+	<tr>
+		<td>이전 경력</td>
+		<td><input type="text" name="previousCareer"/></td>
+	</tr>
+	<tr>
+		<td>최종학력</td>
+		<td>
+		<select name="finalEducation">
+			<option>초졸</option>
+			<option>중졸</option>
+			<option>고졸</option>
+			<option>대졸</option>
+			<option>석사</option>
+			<option>박사</option>	
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>보유기술</td>
+		<td>
+		<select name="skillName">
+			<option>DB연동어플리케이션 개발</option>
+			<option>Android 개발</option>
+			<option>IOS 개발</option>
+			<option>웹 스크립트 개발</option>
+			<option>서버 관리</option>
+			<option>UI/UX 디자인</option>
+			<option>보안 관리</option>
+			<option>프로젝트 관리</option>
+		</select>
+		</td>
+		<td>기술등급</td>
+		<td><input type="text" name="skillLevel"/></td>
 	</tr>
 	<tr>
 		<td colspan="2">
