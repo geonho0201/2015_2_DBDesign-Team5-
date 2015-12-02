@@ -21,10 +21,10 @@
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+			<a href="${pageContext.request.contextPath}/EvalController/evalList.do">평가내역조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
+			<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do">기술조회</a>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='02'}">
 		<tr><td>
@@ -34,10 +34,10 @@
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+			<a href="${pageContext.request.contextPath}/EvalController/evalList.do">평가내역조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
+			<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do">기술조회</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='03'}">
@@ -55,7 +55,7 @@
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">내 프로젝트</a>
 		</td></tr>
 		<tr><td>
-			<a href="">내 기술</a>
+			<a href="${pageContext.request.contextPath}/SkillsetController/of_skillset.do">내 기술</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='06'}">
@@ -66,13 +66,13 @@
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">사내프로젝트조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">평가내역조회</a>
+			<a href="${pageContext.request.contextPath}/ProjectController/createdPro.do">프로젝트 관리</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/Controller/.do">기술조회</a>
+			<a href="${pageContext.request.contextPath}/EvalController/evalList.do">평가내역조회</a>
 		</td></tr>
 		<tr><td>
-			<a href="${pageContext.request.contextPath}/ProjectController/.do">프로젝트생성</a>
+			<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do">기술조회</a>
 		</td></tr>
 		</c:when>
 		<c:when test="${sessionScope.user.getWorks_department() =='07'}">
@@ -85,7 +85,7 @@
 			<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do">내 프로젝트</a>
 		</td></tr>
 		<tr><td>
-			<a href="">내 기술</a>
+			<a href="${pageContext.request.contextPath}/SkillsetController/of_skillset.do">내 기술</a>
 		</td></tr>
 		</c:when>
 	</c:choose>

@@ -13,5 +13,6 @@
 		<jsp:include page="navigator.jsp"></jsp:include>
 	</div>
 	<div>내용</div>
+	${message}
 </body>
 </html>

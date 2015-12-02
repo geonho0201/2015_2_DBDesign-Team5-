@@ -34,7 +34,7 @@ public class MyInfoController {
 		model.setViewName("information");
 		model.addObject("user",user);
 		
-		logger.info("³»Á¤º¸"+user.getId());
+		logger.info("ë‚´ì •ë³´"+user.getId());
 		
 		return model;
 	}
@@ -50,7 +50,7 @@ public class MyInfoController {
 		model.setViewName("modify");
 		model.addObject("user",user);
 		
-		logger.info("³»Á¤º¸¼öÁ¤"+user.getId());
+		logger.info("ë‚´ì •ë³´"+user.getId());
 		
 		return model;
 	}
