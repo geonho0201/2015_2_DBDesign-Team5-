@@ -58,7 +58,8 @@ public class JoinService {
 			throw new InputDataNotValidException("이름이 유효하지 않습니다.");
 		else if (!FieldValidator.validateField(age, 2, 3, "[^\\d]")
 				|| (ageInt <= 10 || ageInt > 100))
-			throw new InputDataNotValidException("나이가가 유효하지 않습니다.");
+			throw new InputDataNotValidException("나이가 유효하지 않습니다.");
+		
 		
 		/* 입력된 정보의 중복성을 검사한다. */
 		else if(FieldValidator.isExistInDB("employee", "employee_number", employeeNumber))

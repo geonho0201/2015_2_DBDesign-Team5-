@@ -99,15 +99,14 @@ public class LoginController {
 		}
 		catch (InputDataNotValidException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("errorMessage", e.getMessage());
+//			return "/join";
 		}
 		catch (InputDataRedundantException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("errorMessage", e.getMessage());
+//			return "/join";
 		}
-		
 		return null;
 	}
 	

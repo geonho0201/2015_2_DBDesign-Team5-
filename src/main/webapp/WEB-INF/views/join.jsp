@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>title</title>
+<title>회원가입</title>
 </head>
 <body>
 <h1>회원가입</h1>
+	<div style="color:red">${errorMessage}</div>
 	<form method="POST" action="${pageContext.request.contextPath}/LoginController/join.do">
 	<table>
 	<tr>
