@@ -98,7 +98,7 @@ public class FieldValidator
 		System.out.println("### DB 중복성 검사 ###");
 		for (String entry : empNums) {
 			System.out.println("Is '" + attrName + "' '" + entry + "' exists in table '" + tableName + "'? "
-					+ isExistInDB("employee", "employee_number", entry));
+					+ isExistInDB(tableName, attrName, entry));
 		}
 		System.out.println();
 		

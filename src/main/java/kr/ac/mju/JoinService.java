@@ -39,8 +39,8 @@ public class JoinService {
 		
 		/* 정수형의 입력값들을 초기화한다(Integer 파싱시 에러 방지). */
 		if ("".equals(age))						age = "0";
-		else if ("".equals(previousCareer))		previousCareer = "0";
-		else if ("".equals(skillLevel))			skillLevel = "0";
+		if ("".equals(previousCareer))		previousCareer = "0";
+		if ("".equals(skillLevel))			skillLevel = "0";
 		
 		int ageInt = Integer.parseInt(age);
 		int previousCareerInt = Integer.parseInt(previousCareer);
