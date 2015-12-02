@@ -48,7 +48,9 @@ integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En
 		</tr> 
 	</c:forEach>
 	</table>
-	<input type="submit" class="btn btn-default"value="평가하기"/>
+	<c:if test="${sessionScope.user.getWorks_department()=='05' || sessionScope.user.getWorks_department()=='08'}">
+	<button type="submit" class="btn btn-default"value="평가하기">평가하기</button>
+	</c:if>
 	<input type="button" class="btn btn-default"value="홈으로" onclick="location.href='/mju/main'" />
 	</form>	
 	<c:if test="${job=='01'}">
