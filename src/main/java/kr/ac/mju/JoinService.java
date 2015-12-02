@@ -3,10 +3,13 @@ package kr.ac.mju;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.ac.mju.exception.InputDataNotValidException;
@@ -18,6 +21,8 @@ public class JoinService {
 	private final static String URL = Constants.URL;
 	private final static String ID = Constants.ID;
 	private final static String PASSWORD = Constants.PASSWORD;
+	
+	private static final Logger logger = LoggerFactory.getLogger(JoinService.class);
 	
 	/**
 	 * 사용자로부터 입력받은 정보들을 이용하여 회원가입을 시도한다.<br />
@@ -33,7 +38,7 @@ public class JoinService {
 	 * @throws InputDataRedundantException 
 	 * @throws ParseException 
 	 */
-	public boolean join(String employeeNumber, String userID, String userPassword,
+	public boolean join(String userID, String userPassword,
 			String userPasswordCheck, String name, String age, String phoneNumber,
 			String address, String email, String ssnPrefix, String ssnSuffix,
 			String worksDepartment, String position, String hiredDate, String previousCareer,
@@ -52,12 +57,15 @@ public class JoinService {
 		
 		/* 날짜형 파싱 */
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date parsedHiredDate = new java.sql.Date(formatter.parse(hiredDate).getTime());
+		java.sql.Date parsedHiredDate = null;
+		if (!"".equals(hiredDate)) {
+			parsedHiredDate = new java.sql.Date(formatter.parse(hiredDate).getTime());
+		}
 		
 		/* 입력된 정보의 유효성을 검사한다. */
-		if (!FieldValidator.validateField(employeeNumber, 8, 8, "[^\\d]"))
-			throw new InputDataNotValidException("사원번호가 유효하지 않습니다.");
-		else if (!FieldValidator.validateField(userID, 6, 20, "[^\\w\\d]"))
+//		if (!FieldValidator.validateField(employeeNumber, 8, 8, "[^\\d]"))
+//			throw new InputDataNotValidException("사원번호가 유효하지 않습니다.");
+		if (!FieldValidator.validateField(userID, 6, 20, "[^\\w\\d]"))
 			throw new InputDataNotValidException("아이디가 유효하지 않습니다.");
 		else if (!FieldValidator.validateField(userPassword, 6, 20, "[^\\x00-\\x7F]")	// [^\\x00-\\x7F]: ASCII 코드
 				|| !userPassword.equals(userPasswordCheck))				// 비밀번호 일치여부 추가 검사.
@@ -70,8 +78,8 @@ public class JoinService {
 		
 		
 		/* 입력된 정보의 중복성을 검사한다. */
-		else if(FieldValidator.isExistInDB("employee", "employee_number", employeeNumber))
-			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
+//		else if(FieldValidator.isExistInDB("employee", "employee_number", employeeNumber))
+//			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
 		else if(FieldValidator.isExistInDB("profile", "id", userID))
 			throw new InputDataRedundantException("입력한 아이디가 이미 사용중입니다.");
 		
@@ -80,13 +88,28 @@ public class JoinService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = DriverManager.getConnection(URL, ID, PASSWORD);;
 			PreparedStatement ps = null;
+			ResultSet rs = null;
 			String sql = null;
+			
+			String nextEmpNum = null;
+			
+			/* 가장 마지막 직원 번호를 불러온다. */
+			sql = "SELECT employee_number FROM employee "
+					+ "WHERE rownum = 1 "
+					+ "ORDER BY employee_number DESC";
+			ps = conn.prepareStatement(sql);
+			if ((rs = ps.executeQuery()).next()) {
+				nextEmpNum = String.valueOf(Integer.parseInt(rs.getString(1)) + 1);
+			} else {
+				logger.warn("사원번호를 불러올 수 없습니다.");
+				return false;
+			}
 			
 			/* employee 테이블에 직원 정보를 삽입한다. */
 			sql = "INSERT INTO employee (employee_number, final_education, hired_date, previous_career) "
 					+ "VALUES (?, ?, ?, ?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, employeeNumber);
+			ps.setString(1, nextEmpNum);
 			ps.setString(2, finalEducaion);
 			ps.setDate(3, parsedHiredDate);
 			ps.setInt(4, parsedPreviousCareer);
@@ -98,7 +121,7 @@ public class JoinService {
 					+ "phone_number, address, email, ssn, signup_date)"
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, SYSTIMESTAMP)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, employeeNumber);
+			ps.setString(1, nextEmpNum);
 			ps.setString(2, userID);
 			ps.setString(3, userPassword);
 			ps.setString(4, name);
@@ -120,7 +143,7 @@ public class JoinService {
 					+ "?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, worksDepartment);
-			ps.setString(2, employeeNumber);
+			ps.setString(2, nextEmpNum);
 			ps.setString(3, position);
 			ps.executeUpdate();
 			ps.close();
@@ -135,7 +158,7 @@ public class JoinService {
 					+ "?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, skillName);
-			ps.setString(2, employeeNumber);
+			ps.setString(2, nextEmpNum);
 			ps.setInt(3, parsedSkillLevel);
 			ps.executeUpdate();
 			ps.close();

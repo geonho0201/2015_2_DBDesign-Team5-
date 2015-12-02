@@ -66,7 +66,7 @@ public class LoginController {
 		logger.info("회원가입 요청을 받았습니다.");
 		
 		request.setCharacterEncoding("UTF-8");
-		String employeeNumber = request.getParameter("employeeNumber");
+//		String employeeNumber = request.getParameter("employeeNumber");
 		String userID = request.getParameter("userID");
 		String userPassword = request.getParameter("userPassword");
 		String userPasswordCheck = request.getParameter("userPasswordCheck");
@@ -87,7 +87,7 @@ public class LoginController {
 		
 		try {
 			
-			boolean success = joinService.join(employeeNumber, userID, userPassword, userPasswordCheck,
+			boolean success = joinService.join(userID, userPassword, userPasswordCheck,
 					name, age, phoneNumber, address, email, ssnPrefix, ssnSuffix, worksDepartment, position,
 					hiredDate, previousCareer, finalEducation, skillName, skillLevel);
 			
