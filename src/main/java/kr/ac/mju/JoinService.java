@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.mju.exception.InputDataNotValidException;
 import kr.ac.mju.exception.InputDataRedundantException;
+import kr.ac.mju.util.FieldValidator;
 
 @Service
 public class JoinService {
@@ -46,21 +47,26 @@ public class JoinService {
 		int skillLevelInt = Integer.parseInt(skillLevel);
 		
 		/* 입력된 정보의 유효성을 검사한다. */
-		if (!validateField(employeeNumber, 8, 8, "[^\\d]"))
+		if (!FieldValidator.validateField(employeeNumber, 8, 8, "[^\\d]"))
 			throw new InputDataNotValidException("사원번호가 유효하지 않습니다.");
-		else if (!validateField(userID, 6, 20, "[^\\w\\d]"))
+		else if (!FieldValidator.validateField(userID, 6, 20, "[^\\w\\d]"))
 			throw new InputDataNotValidException("아이디가 유효하지 않습니다.");
-		else if (!validateField(userPassword, 6, 20, "[^\\x00-\\x7F]")	// [^\\x00-\\x7F]: ASCII 코드
+		else if (!FieldValidator.validateField(userPassword, 6, 20, "[^\\x00-\\x7F]")	// [^\\x00-\\x7F]: ASCII 코드
 				|| !userPassword.equals(userPasswordCheck))				// 비밀번호 일치여부 추가 검사.
 			throw new InputDataNotValidException("비밀번호가 유효하지 않습니다.");
+		else if (!FieldValidator.validateField(name, 2, 20, "[^\\가-힣a-zA-Z]"))
+			throw new InputDataNotValidException("이름이 유효하지 않습니다.");
+		else if (!FieldValidator.validateField(age, 2, 3, "[^\\d]")
+				|| (ageInt <= 10 || ageInt > 100))
+			throw new InputDataNotValidException("나이가가 유효하지 않습니다.");
 		
 		/* 입력된 정보의 중복성을 검사한다. */
-		else if(isDuplicateInDB("employee", "employee_number", userID))
+		else if(FieldValidator.isExistInDB("employee", "employee_number", userID))
 			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
-		else if(isDuplicateInDB("profile", "id", userID))
+		else if(FieldValidator.isExistInDB("profile", "id", userID))
 			throw new InputDataRedundantException("입력한 아이디가 이미 사용중입니다.");
 		
-		/* 입력된 정보가 유효한 경우, */
+		/* 입력된 정보가 유효한 경우, DB에 삽입한다. */
 		else {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = DriverManager.getConnection(URL, ID, PASSWORD);;
@@ -125,40 +131,6 @@ public class JoinService {
 			ps.close();
 			
 			return true;
-		}
-	}
-
-	/**
-	 * 'tableName' 테이블의 'attrName'이란 속성값 중에
-	 * 'field'라는 필드가 존재하는지 검사한다.
-	 * 
-	 * @param tableName
-	 * @param attrName
-	 * @param field
-	 * @return 이미 존재할 경우 true, 존재하지 않을 경우 false를 반환한다.
-	 */
-	private boolean isDuplicateInDB(String tableName, String attrName, String field)
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	private boolean validateField(String field, int minLen, int maxLen) {
-		return validateField(field, minLen, maxLen, null);
-	}
-	
-	/**
-	 * 입력된 정보의 유효성을 검사한다.<br />
-	 * 'field'의 길이가 'minLen'과 'maxLen' 사이인지,
-	 * 그리고 'regex'와 일치하지 않는지 여부를 검사한다.
-	 * 
-	 * @return 위 조건들을 만족할 경우 true, 만족하지 않을 경우 false.
-	 */
-	private boolean validateField(String field, int minLen, int maxLen, String regex) {
-		if (regex != null) {
-			return false;
-		} else {
-			return false;
 		}
 	}
 	
