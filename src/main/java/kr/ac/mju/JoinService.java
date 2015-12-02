@@ -63,8 +63,6 @@ public class JoinService {
 		}
 		
 		/* 입력된 정보의 유효성을 검사한다. */
-//		if (!FieldValidator.validateField(employeeNumber, 8, 8, "[^\\d]"))
-//			throw new InputDataNotValidException("사원번호가 유효하지 않습니다.");
 		if (!FieldValidator.validateField(userID, 6, 20, "[^\\w\\d]"))
 			throw new InputDataNotValidException("아이디가 유효하지 않습니다.");
 		else if (!FieldValidator.validateField(userPassword, 6, 20, "[^\\x00-\\x7F]")	// [^\\x00-\\x7F]: ASCII 코드
@@ -78,8 +76,6 @@ public class JoinService {
 		
 		
 		/* 입력된 정보의 중복성을 검사한다. */
-//		else if(FieldValidator.isExistInDB("employee", "employee_number", employeeNumber))
-//			throw new InputDataRedundantException("입력한 사원번호가 이미 사용중입니다.");
 		else if(FieldValidator.isExistInDB("profile", "id", userID))
 			throw new InputDataRedundantException("입력한 아이디가 이미 사용중입니다.");
 		

@@ -14,10 +14,6 @@
 	<tr>
 	<th colspan="2">내용입력</th>
 	</tr>
-<!-- 	<tr> -->
-<!-- 		<td>직원번호</td> -->
-<!-- 		<td><input type="text" name="employeeNumber"/></td> -->
-<!-- 	</tr> -->
 	<tr>
 		<td>아이디</td>
 		<td><input type="text" name="userID"/></td>

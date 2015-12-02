@@ -66,7 +66,6 @@ public class LoginController {
 		logger.info("회원가입 요청을 받았습니다.");
 		
 		request.setCharacterEncoding("UTF-8");
-//		String employeeNumber = request.getParameter("employeeNumber");
 		String userID = request.getParameter("userID");
 		String userPassword = request.getParameter("userPassword");
 		String userPasswordCheck = request.getParameter("userPasswordCheck");
