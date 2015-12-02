@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class EvalController {
@@ -37,9 +34,39 @@ public class EvalController {
 	private static final Logger logger = LoggerFactory.getLogger(EvalController.class);
 	
 	
+	@RequestMapping(value ="/EvalController/evalList.do", method = RequestMethod.GET)
+	public ModelAndView evalList(HttpSession session) throws ClassNotFoundException, SQLException
+	{
+		ModelAndView model = new ModelAndView();
+		List<User> develList = eService.getDeveloperList();
+		
+		model.setViewName("evallist");
+		model.addObject("develList", develList);
+		logger.info("í‰ê°€ë‚´ì—­");
+		
+		return model;
+	}
+	
+	@RequestMapping(value ="/EvalController/getevalList.do", method = RequestMethod.POST)
+	public ModelAndView getevalList(HttpServletRequest request) throws ClassNotFoundException, SQLException
+	{
+		ModelAndView model = new ModelAndView();
+		String employee_number = request.getParameter("employee_number");
+		List<User> develList = eService.getDeveloperList();
+		List<Eval> evalList = eService.getEvalList(employee_number);
+		
+		model.setViewName("evallist");
+		model.addObject("develList", develList);
+		model.addObject("getEvalList", evalList);
+		
+		logger.info("í‰ê°€ë‚´ì—­");
+		
+		return model;
+	}
+	
 	@RequestMapping(value = "/EvalController/eval.do")
 	public String evaluate(@RequestParam String employee_number, @RequestParam String project_number, 
-						HttpSession session, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
+					HttpSession session, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {	
 		logger.info("");
 		
 		user= (User)session.getAttribute("user");
@@ -53,20 +80,24 @@ public class EvalController {
 		return "eval";
 	}
 	
+	
 	@RequestMapping(value="/EvalController/addEval.do",method = RequestMethod.POST)
 	public String addEval(@ModelAttribute Eval eval,Model model) throws ClassNotFoundException, SQLException
 	{
 		if(!eService.evalPeriod(eval.getProject_number())){
-			model.addAttribute("message","<script>alert('Æò°¡±â°£ÀÌ ¾Æ´Õ´Ï´Ù.');history.go(-1);</script>");
+			model.addAttribute("message","<script>alert('í‰ê°€ê¸°ê°„ì´ ì•„ë‹™ë‹ˆë‹¤.');history.go(-1);</script>");
 			return "eval";
 		}else if(eService.insertEval(eval)){
-			model.addAttribute("message","<script>alert('Æò°¡°¡ ¿Ï·á µÇ¾ú½À´Ï´Ù.');history.go(-1);</script>");
+			model.addAttribute("message","<script>alert('í‰ê°€ê°€ ì™„ë£Œ ë˜ì—ˆìŠµë‹ˆë‹¤.');history.go(-1);</script>");
 			return "main";
 		}else{
-			model.addAttribute("message", "<script>alert('Æò°¡°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù.');history.go(-1);</script>");
+			model.addAttribute("message", "<script>alert('í‰ê°€ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.');history.go(-1);</script>");
 			eService.updateEval(eval);
 			return "eval";
-	}
+		}
+		
+	
+	
 		
 	}
 	

@@ -11,7 +11,7 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<div style="float: left;">
 	<jsp:include page="navigator.jsp"></jsp:include>
-	<div class="col-md-16">	
+	<div class="col-md-9">	
 	<h2>내 프로젝트</h2>
 	<h3>${message}</h3>	
 	<table class="table">
@@ -28,7 +28,7 @@
 		<td><h4><c:out value="${result.project_desc}"/></h4></td></tr>
 		<tr>
 		<td><input type="hidden" name="project_number" value=<c:out value="${result.project_number}"/>/>
-			<button type="submit" class="btn btn-default" value="*" />*</button></td><td></td><td></td></tr>
+			<button type="submit" class="btn btn-default" value="투입직원" >투입직원</button></td><td></td><td></td></tr>
 
 		</form>
 	</c:forEach>

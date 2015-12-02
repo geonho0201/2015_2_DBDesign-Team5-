@@ -26,7 +26,7 @@
 				<td><h5>${result.name}</h5><div class="col-xs-3"><input type="hidden" class="form-control" name="project_number" value="${result.project_number}"/></div>
 								<div class="col-xs-3"><input type="hidden" class="form-control" name="evaluater_number" value="${sessionScope.user.getEmployee_number()}"/></div></td></tr>
 			<tr><td><h5>평가종류</h5></td>
-				<td><div class="col-xs-3"><select name="eval_type"class="form-control" ></div>
+				<td><div class="col-xs-4"><select name="eval_type"class="form-control" ></div>
 					<option value="동료평가">동료평가</option>
 					<c:if test="${myJob=='PM' }">
 						<option value="PM평가">PM평가</option>
@@ -44,7 +44,7 @@
 			</c:if>
 		</c:forEach>
 
-	<tr><td><input type="submit" class="btn btn-default" value="제출" onclick="constraint(); return false;"/>   <input type="button" value="홈으로" onclick="location.href='/mju/main'"/></td></tr>
+	<tr><td><button type="submit" class="btn btn-default" value="제출" onclick="constraint(); return false;">제출</button>   <button class="btn btn-default" value="홈으로" onclick="location.href='/mju/main'">홈으로</button></td></tr>
 	</table>
 	</form>
 	</div>

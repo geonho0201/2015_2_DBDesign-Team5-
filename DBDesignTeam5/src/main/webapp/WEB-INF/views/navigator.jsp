@@ -17,14 +17,14 @@
 	                    	<c:when test="${sessionScope.user.getWorks_department() =='01'}">							
 									<a href="${pageContext.request.contextPath}/EmployeeController/employee.do"class="list-group-item">직원관리</a>
 									<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do"class="list-group-item">사내프로젝트조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">평가내역조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">기술조회</a>
+									<a href="${pageContext.request.contextPath}/EvalController/evalList.do"class="list-group-item">평가내역조회</a>
+									<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do"class="list-group-item">기술조회</a>
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='02'}">
 									<a href="${pageContext.request.contextPath}/EmployeeController/employee.do"class="list-group-item">직원관리</a>
 									<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do"class="list-group-item">사내프로젝트조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">평가내역조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">기술조회</a>
+									<a href="${pageContext.request.contextPath}/EvalController/evalList.do"class="list-group-item">평가내역조회</a>
+									<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do"class="list-group-item">기술조회</a>
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='03'}">
 									<a href="${pageContext.request.contextPath}/EmployeeController/employee.do"class="list-group-item">직원검색</a>
@@ -34,13 +34,13 @@
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='05'}">
 									<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do"class="list-group-item">내 프로젝트</a>
-									<a href="#" class="list-group-item">내 기술</a>
+									<a href="${pageContext.request.contextPath}/SkillsetController/of_skillset.do" class="list-group-item">내 기술</a>
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='06'}">
 									<a href="${pageContext.request.contextPath}/EmployeeController/employee.do"class="list-group-item">직원검색</a>
 									<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do"class="list-group-item">사내프로젝트조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">평가내역조회</a>
-									<a href="${pageContext.request.contextPath}/Controller/.do"class="list-group-item">기술조회</a>
+									<a href="${pageContext.request.contextPath}/EvalController/evalList.do"class="list-group-item">평가내역조회</a>
+									<a href="${pageContext.request.contextPath}/SkillsetController/skillset_list.do"class="list-group-item">기술조회</a>
 									<a href="${pageContext.request.contextPath}/ProjectController/.do"class="list-group-item">프로젝트생성</a>
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='07'}">
@@ -48,7 +48,7 @@
 								</c:when>
 								<c:when test="${sessionScope.user.getWorks_department() =='08'}">
 									<a href="${pageContext.request.contextPath}/ProjectController/projectLoad.do"class="list-group-item">내 프로젝트</a>
-									<a href="#" class="list-group-item">내 기술</a>
+									<a href="${pageContext.request.contextPath}/SkillsetController/of_skillset.do" class="list-group-item">내 기술</a>
 								</c:when>
 	                    </c:choose>
 	                </div>

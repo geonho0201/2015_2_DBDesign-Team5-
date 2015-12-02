@@ -2,6 +2,7 @@ package kr.ac.mju;
 
 import java.sql.SQLException;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class ProjectController {
 	private ProjectService service;
 	@Autowired
 	private EmployeeService eService;
-	private User user = new User();;
+	private User user = new User();
 	private String comparison;
 	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
 	
@@ -32,7 +33,7 @@ public class ProjectController {
 		logger.info("");
 		
 		user = (User)session.getAttribute("user");
-		if(user.getWorks_department().equals("02")){
+		if(user.getWorks_department().equals("02") ||user.getWorks_department().equals("01") || user.getWorks_department().equals("06")){
 			comparison = "%";
 		}else{
 			comparison = user.getEmployee_number();
@@ -45,39 +46,41 @@ public class ProjectController {
 	
 	@RequestMapping(value = "/ProjectController/assign.do")
 	public String assignedMember(@RequestParam String project_number, HttpSession session, Model model) throws ClassNotFoundException, SQLException{
-		
+	 	
 		logger.info("");
+		
 		user=(User)session.getAttribute("user");
 		List<Assignment> list = service.loadAssignedMem(project_number.substring(0, 8));
 		model.addAttribute("job",service.getJob(user.getEmployee_number(),project_number.substring(0, 8)));
-		model.addAttribute("project_number", project_number); 	//ÀÎ¿ø ÅõÀÔÀ» À§ÇØ »ç¿ë
+		model.addAttribute("project_number", project_number); 	//ì¸ì› íˆ¬ì…ì„ ìœ„í•´ ì‚¬ìš©
 		model.addAttribute("list",list);
+		
 		return "assign";
 	}
-	//-------------------------------------------------------------------------------------------------------------
+	
 	@RequestMapping(value="/ProjectController/createdPro.do")
 	public String showCreateProByMe(HttpSession session,Model model) throws ClassNotFoundException, SQLException
 	{
 		
 		logger.info("");
-		
+			
 		user =(User)session.getAttribute("user");
 		List<String> pm = service.getPM(user.getEmployee_number());
 		List<Project> list = service.getMyProject(user.getEmployee_number());
 		model.addAttribute("list",list);
 		model.addAttribute("pm",pm);
-		
+	
 		return "createdPro";
 	}
-	
+		
 	@RequestMapping(value="/ProjectController/createForm.do")
 	public String showCreateProjectForm(HttpSession session,Model model) throws ClassNotFoundException, SQLException
 	{
 		logger.info("");
-		List<User> list = eService.getEmployeeList("08");	//pm¸®½ºÆ®
-		user = (User)session.getAttribute("user");			//constructorÁ¤º¸
+		List<User> list = eService.getEmployeeList("08");	//pmë¦¬ìŠ¤íŠ¸
+		user = (User)session.getAttribute("user");			//constructorì •ë³´
 		model.addAttribute("developer",list);
-		model.addAttribute("project_number", service.getProjectNum());	//ÇÁ·ÎÁ§Æ® ³Ñ¹ö ·Îµå
+		model.addAttribute("project_number", service.getProjectNum());	//í”„ë¡œì íŠ¸ ë„˜ë²„ ë¡œë“œ
 		model.addAttribute("session", user);
 		
 		
@@ -89,8 +92,8 @@ public class ProjectController {
 	{
 		logger.info("");
 		
-		service.insertProject(project,employee_number);			//+assignment,assign_job »ı¼º
-		model.addAttribute("message", "<script>alert('»õ ÇÁ·ÎÁ§Æ®°¡ »ı¼º µÇ¾ú½À´Ï´Ù.');history.go(-3);</script>");
+		service.insertProject(project,employee_number);			//+assignment,assign_job ìƒì„±
+		model.addAttribute("message", "<script>alert('ìƒˆ í”„ë¡œì íŠ¸ê°€ ìƒì„± ë˜ì—ˆìŠµë‹ˆë‹¤.');history.go(-3);</script>");
 		return "createPro";
 	}
 	
@@ -99,13 +102,10 @@ public class ProjectController {
 	{
 		logger.info("");
 		
-		service.deleteProject(project_number);			//+assignment,assign_job »ı¼º
-		model.addAttribute("message", "<script>alert('ÇÁ·ÎÁ§Æ®°¡ »èÁ¦ µÇ¾ú½À´Ï´Ù.');</script>");
+		service.deleteProject(project_number);			//+assignment,assign_job ìƒì„±
+		model.addAttribute("message", "<script>alert('í”„ë¡œì íŠ¸ê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.');</script>");
 		return "redirect:/ProjectController/createdPro.do";
 	}
-	
-	
-	
 	
 	
 }

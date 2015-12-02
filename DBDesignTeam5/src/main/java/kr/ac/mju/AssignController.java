@@ -59,7 +59,7 @@ public class AssignController {
 		logger.info("");
 		assignment.setProject_number(assignment.getProject_number().substring(0, 8));
 		service.insertAssign(assignment);
-		model.addAttribute("message","<script>alert('Á÷¿øÀÌ ÅõÀÔ µÇ¾ú½À´Ï´Ù.');</script>");
+		model.addAttribute("message","<script>alert('ì§ì›ì´ íˆ¬ì… ë˜ì—ˆìŠµë‹ˆë‹¤.');</script>");
 		return "main";
 	}
 	
@@ -69,7 +69,7 @@ public class AssignController {
 		employee_number=employee_number.substring(0, 8);
 		project_number=project_number.substring(0, 8);
 		service.deleteAssign(employee_number,project_number);
-		model.addAttribute("message","<script>alert('Á÷¿øÀÌ ÅõÃâ µÇ¾ú½À´Ï´Ù.');</script>");
+		model.addAttribute("message","<script>alert('ì§ì›ì´ íˆ¬ì¶œ ë˜ì—ˆìŠµë‹ˆë‹¤.');</script>");
 		return "main";
 	}
 	

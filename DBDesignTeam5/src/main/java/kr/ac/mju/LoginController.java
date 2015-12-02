@@ -30,22 +30,22 @@ public class LoginController {
 		String userPassword = request.getParameter("userPassword");
 		
 		User user = service.login(userID, userPassword);
-		logger.info("·Î±×ÀÎ½Ãµµ"+userID);
+		logger.info("ë¡œê·¸ì¸ì‹œë„"+userID);
 
 		if(user.getName()!=""){
 			session.setAttribute("user", user);
 			session.setMaxInactiveInterval(60*60);
 			return "main";
 		}else{
-			redirectAttr.addFlashAttribute("errormsg","·Î±×ÀÎ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù!");
+			redirectAttr.addFlashAttribute("errormsg","ë¡œê·¸ì¸ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤!");
 			return "redirect:/";
 		}
 	}
 	
 	@RequestMapping(value = "/LoginController/logout.do", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
-		
-		logger.info("·Î±×¾Æ¿ô");
+	public String logout(HttpSession session) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
+		session.removeAttribute("user");
+		logger.info("ë¡œê·¸ì•„ì›ƒ");
 		
 		return "redirect:/";
 	}
@@ -53,7 +53,7 @@ public class LoginController {
 	@RequestMapping(value = "/LoginController/join.do", method = RequestMethod.POST)
 	public String join(HttpServletRequest request, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
 		
-		logger.info("È¸¿ø°¡ÀÔ");
+		logger.info("íšŒì›ê°€ì…");
 		
 		return "join";
 	}

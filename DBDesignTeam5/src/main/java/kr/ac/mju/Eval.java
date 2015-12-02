@@ -64,7 +64,4 @@ public class Eval {
 		this.communication_eval = communication_eval;
 	}
 	
-	
-	
-
 }

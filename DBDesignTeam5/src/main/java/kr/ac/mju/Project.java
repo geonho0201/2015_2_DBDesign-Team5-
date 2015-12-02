@@ -10,12 +10,6 @@ public class Project {
 	private Date start_date;
 	private Date due_date;
 	private String orderer;
-	public String getConstructor_number() {
-		return constructor_number;
-	}
-	public void setConstructor_number(String constructor_number) {
-		this.constructor_number = constructor_number;
-	}
 	private String project_desc;
 	private String constructor_number;
 	
@@ -31,6 +25,9 @@ public class Project {
 	public void setOrderer(String orderer) {this.orderer = orderer;}
 	public String getProject_desc() {return project_desc;}
 	public void setProject_desc(String project_desc) {this.project_desc = project_desc;}
+	public String getConstructor_number() {return constructor_number;}
+	public void setConstructor_number(String constructor_number) {this.constructor_number = constructor_number;}
+	
 	
 
 }

@@ -30,7 +30,7 @@ public class EmployeeController {
 		ModelAndView model = new ModelAndView();
 		model.setViewName("employee");
 		
-		logger.info("Á÷¿ø°Ë»ö¸Ş´º·Î");
+		logger.info("ì§ì›ê²€ìƒ‰ë©”ë‰´ë¡œ");
 		
 		return model;
 	}
@@ -38,7 +38,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/EmployeeController/employeeRetrieve.do", method = RequestMethod.POST)
 	public String employeeRetrieve(HttpServletRequest request, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
 		
-		logger.info("Á÷¿ø°Ë»ö");
+		logger.info("ì§ì›ê²€ìƒ‰");
 		
 		String option = request.getParameter("retrieveOption");
 		List<User> userList = service.getEmployeeList(option);
@@ -50,7 +50,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/EmployeeController/employeeSkillset.do", method = RequestMethod.POST)
 	public String employeeSkillset(HttpServletRequest request, Model model) throws UnsupportedEncodingException, ClassNotFoundException, SQLException {
 		
-		logger.info("Á÷¿øº¸À¯±â¼ú°Ë»ö");
+		logger.info("ì§ì›ë³´ìœ ê¸°ìˆ ê²€ìƒ‰");
 		
 		
 		
